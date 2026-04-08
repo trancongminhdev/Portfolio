@@ -1,7 +1,8 @@
 'use client';
 
 import { useInView } from '@/hooks/use-in-view';
-import { Zap, Target, Lightbulb, Rocket, Satellite, Star } from 'lucide-react';
+import { ABOUT_ME } from '@/types/constant';
+import { MdOutlineRocketLaunch } from "react-icons/md";
 
 export function About() {
     const { ref, isInView } = useInView();
@@ -12,7 +13,7 @@ export function About() {
                 {/* Section Header */}
                 <div className={`mb-12 ${isInView ? 'animate-fade-in-up opacity-100' : 'opacity-0'}`}>
                     <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 flex items-center gap-3">
-                        <Rocket className="text-primary" size={40} />
+                        <MdOutlineRocketLaunch className="text-primary" size={40} />
                         Về Tôi
                     </h2>
                     <div className="w-16 h-1 bg-gradient-to-r from-primary to-accent rounded-full"></div>
@@ -23,7 +24,7 @@ export function About() {
                     {/* Text Content */}
                     <div className={`space-y-6 ${isInView ? 'animate-slide-in-left opacity-100' : 'opacity-0'}`}>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            Tôi là một nhà phát triển React đầy năng động và đam mê tạo các ứng dụng web thân thiện với người dùng. Hành trình của tôi vào lĩnh vực phát triển web bắt đầu từ sự tò mò về cách các trang web hoạt động, và nó đã phát triển thành một niềm đam mê chân thành để tạo ra những trải nghiệm kỹ thuật số đẹp tuyệt vời.
+                            Tôi là một Frontend Developer đầy năng động và đam mê tạo các ứng dụng web thân thiện với người dùng. Hành trình của tôi vào lĩnh vực phát triển web bắt đầu từ sự tò mò về cách các trang web hoạt động, và nó đã phát triển thành một niềm đam mê chân thành để tạo ra những trải nghiệm kỹ thuật số đẹp tuyệt vời.
                         </p>
                         <p className="text-lg text-muted-foreground leading-relaxed">
                             Trong năm qua, tôi đã làm việc trên nhiều dự án khác nhau giúp tôi phát triển các kỹ năng vững chắc trong React, JavaScript và CSS hiện đại. Tôi đặc biệt quan tâm đến tối ưu hóa hiệu suất, khả năng tiếp cận và tạo ra các giao diện người dùng trực quan.
@@ -35,11 +36,7 @@ export function About() {
 
                     {/* Stats/Info Cards */}
                     <div className={`space-y-4 ${isInView ? 'animate-slide-in-right opacity-100' : 'opacity-0'}`}>
-                        {[
-                            { icon: Rocket, title: 'Học Nhanh', desc: 'Tôi nhanh chóng tiếp thu các công nghệ và khái niệm mới' },
-                            { icon: Satellite, title: 'Giải Quyết Vấn Đề', desc: 'Tôi thích giải quyết các vấn đề kỹ thuật phức tạp' },
-                            { icon: Star, title: 'Tư Duy Sáng Tạo', desc: 'Tôi mang những ý tưởng sáng tạo đến mỗi dự án' },
-                        ].map((item, i) => {
+                        {ABOUT_ME.map((item, i) => {
                             const Icon = item.icon;
                             return (
                                 <div

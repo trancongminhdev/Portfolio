@@ -1,26 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Menu, X, Rocket } from 'lucide-react';
-
+import { NAVBAR } from '@/types/constant';
+import { useEffect, useState } from 'react';
+import { IoMdClose, IoMdMenu } from "react-icons/io";
+import { MdOutlineRocketLaunch } from 'react-icons/md';
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrollY, setScrollY] = useState(0);
     const [activeSection, setActiveSection] = useState('');
-
-    const sections = ['about', 'projects', 'skills', 'contact'];
 
     useEffect(() => {
         const handleScroll = () => {
             setScrollY(window.scrollY);
 
             // Detect active section
-            for (const section of sections) {
-                const element = document.getElementById(section);
+            for (const section of NAVBAR) {
+                const element = document.getElementById(section.href);
                 if (element) {
                     const rect = element.getBoundingClientRect();
                     if (rect.top <= 100 && rect.bottom >= 100) {
-                        setActiveSection(section);
+                        setActiveSection(section.href);
                         break;
                     }
                 }
@@ -42,8 +41,8 @@ export function Header() {
     return (
         <header
             className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-background/90 backdrop-blur-md border-b border-border/50'
-                    : 'bg-transparent'
+                ? 'bg-background/90 backdrop-blur-md border-b border-border/50'
+                : 'bg-transparent'
                 }`}
         >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,28 +51,28 @@ export function Header() {
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg animate-fade-in-down"
                             style={{ animationDelay: '0.1s' }}>
-                            <Rocket size={20} />
+                            <MdOutlineRocketLaunch size={20} />
                         </div>
                         <span className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-fade-in-down"
                             style={{ animationDelay: '0.15s' }}>
-                            Phi Hành Gia
+                            Trần Công Minh
                         </span>
                     </div>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex gap-8 items-center">
-                        {['about', 'projects', 'skills'].map((item, i) => (
+                        {NAVBAR.map((item, i) => (
                             <button
-                                key={item}
-                                onClick={() => scrollToSection(item)}
-                                className={`capitalize text-sm font-medium transition-all duration-300 animate-fade-in-down opacity-0 relative py-2 ${activeSection === item
-                                        ? 'text-primary font-semibold'
-                                        : 'text-foreground hover:text-primary'
+                                key={item.id}
+                                onClick={() => scrollToSection(item.href)}
+                                className={`cursor-pointer capitalize text-sm font-medium transition-all duration-300 animate-fade-in-down opacity-0 relative py-2 ${activeSection === item.href
+                                    ? 'text-primary font-semibold'
+                                    : 'text-foreground hover:text-primary'
                                     }`}
                                 style={{ animationDelay: `${0.2 + i * 0.1}s`, animationFillMode: 'forwards' }}
                             >
-                                {item}
-                                {activeSection === item && (
+                                {item.name}
+                                {activeSection === item.href && (
                                     <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full" />
                                 )}
                             </button>
@@ -93,7 +92,7 @@ export function Header() {
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="Toggle menu"
                     >
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isMenuOpen ? <IoMdClose size={24} /> : <IoMdMenu size={24} />}
                     </button>
                 </div>
 
@@ -105,8 +104,8 @@ export function Header() {
                                 key={item}
                                 onClick={() => scrollToSection(item)}
                                 className={`block w-full text-left px-4 py-3 capitalize text-sm font-medium transition-colors rounded-lg ${activeSection === item
-                                        ? 'bg-primary/20 text-primary'
-                                        : 'text-foreground hover:bg-muted'
+                                    ? 'bg-primary/20 text-primary'
+                                    : 'text-foreground hover:bg-muted'
                                     }`}
                                 style={{ animationDelay: `${i * 0.05}s` }}
                             >
@@ -115,7 +114,7 @@ export function Header() {
                         ))}
                         <button
                             onClick={() => scrollToSection('contact')}
-                            className="block w-full text-center px-4 py-3 mt-2 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium"
+                            className="cursor-pointer block w-full text-center px-4 py-3 mt-2 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium"
                         >
                             Liên Hệ
                         </button>

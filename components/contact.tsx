@@ -1,11 +1,12 @@
 'use client';
 
 import { useInView } from '@/hooks/use-in-view';
-import { ExternalLink, Rocket, Send } from 'lucide-react';
+import { SOCIAL_LINKS } from '@/types/constant';
+import Link from 'next/link';
 import { useState } from 'react';
-import { CiMail, CiTwitter } from 'react-icons/ci';
-import { FaGithub } from 'react-icons/fa';
-import { FiLinkedin } from 'react-icons/fi';
+import { BsSend } from "react-icons/bs";
+import { FiExternalLink } from 'react-icons/fi';
+import { MdOutlineRocketLaunch } from 'react-icons/md';
 
 export function Contact() {
     const { ref, isInView } = useInView();
@@ -28,12 +29,7 @@ export function Contact() {
         }, 3000);
     };
 
-    const socialLinks = [
-        { icon: CiMail, label: 'Email', href: 'mailto:hello@example.com', color: 'hover:text-red-500' },
-        { icon: FiLinkedin, label: 'LinkedIn', href: 'https://linkedin.com', color: 'hover:text-blue-500' },
-        { icon: FaGithub, label: 'GitHub', href: 'https://github.com', color: 'hover:text-gray-700 dark:hover:text-gray-300' },
-        { icon: CiTwitter, label: 'Twitter', href: 'https://twitter.com', color: 'hover:text-sky-500' },
-    ];
+
 
     return (
         <section id="contact" ref={ref} className="py-20 px-4 bg-muted/30">
@@ -41,7 +37,7 @@ export function Contact() {
                 {/* Section Header */}
                 <div className={`mb-12 text-center ${isInView ? 'animate-fade-in-up opacity-100' : 'opacity-0'}`}>
                     <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 inline-flex items-center gap-3">
-                        <Send className="text-accent" size={40} />
+                        <BsSend className="text-accent" size={40} />
                         Liên Hệ Với Tôi
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
@@ -92,9 +88,9 @@ export function Contact() {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                                className="cursor-pointer w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
                             >
-                                <Send size={18} />
+                                <BsSend size={18} />
                                 {submitted ? 'Đã Gửi! ✓' : 'Gửi Tin Nhắn'}
                             </button>
                         </form>
@@ -105,17 +101,17 @@ export function Contact() {
                         <div className="space-y-6">
                             <div className="p-6 bg-background border border-border rounded-xl">
                                 <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                                    <Rocket className="text-primary" size={24} />
+                                    <MdOutlineRocketLaunch className="text-primary" size={24} />
                                     Kết Nối Với Tôi
                                 </h3>
                                 <p className="text-muted-foreground mb-6 leading-relaxed">
                                     Tôi luôn vui lòng trò chuyện về phát triển web, React hoặc những cơ hội tiềm năng. Đừng ngần ngại liên hệ với tôi!
                                 </p>
                                 <div className="space-y-3">
-                                    {socialLinks.map((link, i) => {
+                                    {SOCIAL_LINKS.map((link, i) => {
                                         const Icon = link.icon;
                                         return (
-                                            <a
+                                            <Link
                                                 key={i}
                                                 href={link.href}
                                                 target="_blank"
@@ -124,8 +120,8 @@ export function Contact() {
                                             >
                                                 <Icon className={`w-5 h-5 transition-colors duration-300 ${link.color}`} />
                                                 <span className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{link.label}</span>
-                                                <ExternalLink className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                            </a>
+                                                <FiExternalLink className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                            </Link>
                                         );
                                     })}
                                 </div>

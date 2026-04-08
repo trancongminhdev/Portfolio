@@ -85,7 +85,7 @@ export function Starfield() {
 
             // Create radiating star particles every 25 pixels of movement
             if (distFromLast > 25) {
-                const particleCount = 8;
+                const particleCount = 12;
                 for (let i = 0; i < particleCount; i++) {
                     const angle = (i / particleCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
                     const speed = Math.random() * 3 + 2;
@@ -114,7 +114,7 @@ export function Starfield() {
         let animationId: number;
         const animate = () => {
             // Clear canvas with semi-transparent dark background
-            ctx.fillStyle = 'rgba(9, 14, 35, 0.1)';
+            ctx.fillStyle = 'rgba(9, 14, 35)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // Draw regular stars
